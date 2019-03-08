@@ -17,6 +17,7 @@ import { EventsAppComponent } from "./events-app.component";
 
 import { NavBarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
+import { AuthService } from './user/auth.service';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { appRoutes } from "./routes";
     ToastrService,
     EventResolverService,
     EventRouteActivator,
+    AuthService,
     { provide: "canDeactivateChecker", useValue: checkValueIsDirty }
   ],
   bootstrap: [EventsAppComponent]
@@ -55,6 +57,9 @@ import { appRoutes } from "./routes";
  */
 export class AppModule {}
 
+/**
+ * Can deactivate checker implemented as a method instead of a class.
+ */
 export function checkValueIsDirty(component: CreateEventComponent) {
   if (component.isDirty)
     return window.confirm(

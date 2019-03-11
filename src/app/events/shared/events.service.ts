@@ -22,6 +22,13 @@ export class EventsService {
 
     return subject;
   }
+
+  saveEvent(newEvent: any) {
+    newEvent.id = 999;
+    newEvent.sessions = [];
+    EVENTS.push(newEvent);
+  }
+
   getEvent(id: number): IEvent{
     return EVENTS.find(event=> event.id === id);
   }

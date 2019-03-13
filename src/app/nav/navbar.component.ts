@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../user/auth.service';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { AuthService } from "../user/auth.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'nav-bar',
-  templateUrl: 'navbar.component.html',
+  selector: "nav-bar",
+  templateUrl: "navbar.component.html",
   styles: [`
     div >ul >li > a.active {
       color: #f97294;
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
       color: crimson;
       text-decoration: overline;
     }
-  `]
+  `],
 })
 
 export class NavBarComponent {

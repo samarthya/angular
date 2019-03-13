@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
+import { Component } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { AuthService } from "./auth.service";
+import { Router } from "@angular/router";
 
 /**
  * As soon as you import the FormsModule,
@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
  * a special selector.
  */
 @Component({
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.css'],
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.css"],
 })
 
 /**
@@ -20,21 +20,21 @@ import { Router } from '@angular/router';
  * opposed to the Model based Form.
  */
 export class LoginComponent {
-  mouseHelp: boolean;
-  userName: string;
-  password: string;
+  public mouseHelp: boolean;
+  public userName: string;
+  public password: string;
 
   constructor(private authService: AuthService, private router: Router) {
     this.mouseHelp = false;
   }
 
-  login(loginForm: NgForm) {
+  public login(loginForm: NgForm) {
     console.log(loginForm.value);
     this.authService.loginUser(loginForm.value.userName, loginForm.value.password);
-    this.router.navigate(['events']);
+    this.router.navigate(["events"]);
   }
 
-  onCancel() {
-    this.router.navigate(['events']);
+  public onCancel() {
+    this.router.navigate(["events"]);
   }
 }

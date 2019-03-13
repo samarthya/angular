@@ -1,17 +1,11 @@
 {
     "extends": "../tslint.json",
+    "linterOptions": {
+      "exclude": ["e2e/*.ts",
+      "node_modules/**"]
+    },
+    "defaultSeverity": "warn",
     "rules": {
-        "directive-selector": [
-            true,
-            "attribute",
-            "app",
-            "camelCase"
-        ],
-        // "component-selector": [
-        //     true,
-        //     "element",
-        //     "app",
-        //     "kebab-case"
-        // ]
+      "ordered-imports": false
     }
 }

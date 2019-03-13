@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { IEvent } from './shared';
+import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { IEvent } from "./shared";
 
 
 @Component({
-  selector: 'event-thumbnail',
+  selector: "event-thumbnail",
   template: `
   <div>
   <div class="well hoverwell thumbnail">
@@ -14,7 +14,7 @@ import { IEvent } from './shared';
   </div>
   <button class="btn btn-primary" (click)="handleClickMe()">Click Me!</button>
   </div>
-  `
+  `,
 })
 /**
  * Input properties, Output properties and template reference.
@@ -24,11 +24,11 @@ export class EventThumbnailComponent {
    * Input property that takes a value.
    * Passing data into the child component.
    */
-  @Input() event: IEvent;
-  @Output() eventClick = new EventEmitter();
+  @Input() public event: IEvent;
+  @Output() public eventClick = new EventEmitter();
 
-  handleClickMe() {
-    console.log('Clicked');
+  public handleClickMe() {
+    console.log("Clicked");
     this.eventClick.emit(this.event.name);
   }
 }

@@ -1,6 +1,6 @@
 # NgFundamentals
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.4.
+Tryint to learn Angular while creating a tuotrial application with the help of Plural Sight. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.4.
 
 ## Development server
 
@@ -25,3 +25,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Learning so far
+
+* Never use ending commas with the **TSLINT** application. Make sure you **_DO NOT append any COMMAS_** at the end of last lines of any object or statement you are defining in the _tslint.json_

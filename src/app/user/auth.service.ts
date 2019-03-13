@@ -1,24 +1,24 @@
-import { Injectable } from '@angular/core';
-import { IUser } from './user.model';
+import { Injectable } from "@angular/core";
+import { IUser } from "./user.model";
 
 @Injectable()
 export class AuthService {
-  currentUser: IUser;
+  public currentUser: IUser;
 
-  loginUser(userName: string, password: string) {
+  public loginUser(userName: string, password: string) {
     this.currentUser = {
       id: 1,
-      userName: userName,
+      userName,
       lastName: "Sharma",
-      firstName: 'Saurabh',
-    }
+      firstName: "Saurabh",
+    };
   }
 
-  isAuthenticated() {
+  public isAuthenticated() {
     return !!this.currentUser;
   }
 
-  updateProfile(firstName: string, lastName: string){
+  public updateProfile(firstName: string, lastName: string) {
     this.currentUser.firstName = firstName;
     this.currentUser.lastName = lastName;
   }

@@ -20,8 +20,8 @@ import { Router } from "@angular/router";
       .error {
         background-color: coral;
       }
-    `
-  ]
+    `,
+  ],
 })
 
 export class ProfileComponent implements OnInit {
@@ -29,54 +29,54 @@ export class ProfileComponent implements OnInit {
    * The FORM that will be used.
    * @type FormGroup
    */
-  profileForm: FormGroup;
+  public profileForm: FormGroup;
 
   /**
    * The string controls for the FormControl
    * @type FormControl
    */
-  lastName: FormControl;
+  public lastName: FormControl;
 
   /**
    * Last name of the logged in user.
    * @type LastName
    */
-  firstName: FormControl;
+  public firstName: FormControl;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   /**
    * On cancel method that has been bound to the btnCancel
    */
-  onCancel() {
+  public onCancel() {
     this.router.navigate(["events"]);
   }
 
   /**
    * Reactive form: Validate the first name.
    */
-  validateLastName() {
+  public validateLastName() {
     return this.lastName.valid || this.lastName.untouched;
   }
 
   /**
    * Validates the first name.
    */
-  validateFirstName() {
+  public validateFirstName() {
     return this.firstName.valid || this.firstName.untouched ;
   }
 
   /**
    * Save method.
    */
-  onSave() {
+  public onSave() {
     /**
      * Only if the form is valid.
      */
     if (this.profileForm.valid) {
       this.authService.updateProfile(
         this.profileForm.value.firstName,
-        this.profileForm.value.lastName
+        this.profileForm.value.lastName,
       );
       /** Once valid then we need to navigate to the Events page. */
       this.router.navigate(["events"]);
@@ -86,19 +86,19 @@ export class ProfileComponent implements OnInit {
   /**
    * On component initialize we need to add the first name and the last name and add to the form Group.
    */
-  ngOnInit() {
+  public ngOnInit() {
     this.firstName = new FormControl(
       this.authService.currentUser.firstName,
-      [Validators.required,Validators.pattern("^[a-zA-Z].*")]
+      [Validators.required, Validators.pattern("^[a-zA-Z].*")],
     );
     this.lastName = new FormControl(
       this.authService.currentUser.lastName,
-      Validators.required
+      Validators.required,
     );
 
     this.profileForm = new FormGroup({
       firstName: this.firstName,
-      lastName: this.lastName
+      lastName: this.lastName,
     });
   }
 }

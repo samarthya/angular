@@ -10,34 +10,34 @@ import {
   EventRouteActivator,
   EventsListComponent,
   EventResolverService,
-  CreateSessionComponent
+  CreateSessionComponent,
 } from "./events/index";
 
 export const appRoutes: Routes = [
   {
     path: "events",
     component: EventsListComponent,
-    resolve: { events: EventResolverService }
+    resolve: { events: EventResolverService },
   },
   {
     path: "events/new",
     component: CreateEventComponent,
-    canDeactivate: ["canDeactivateChecker"]
+    canDeactivate: ["canDeactivateChecker"],
   },
   {
     path: "events/session/new",
-    component: CreateSessionComponent
+    component: CreateSessionComponent,
   },
   {
     path: "events/:id",
     component: EventDetailsComponent,
-    canActivate: [EventRouteActivator]
+    canActivate: [EventRouteActivator],
   },
   { path: "404", component: ErrorComponent },
   {
     path: "",
     redirectTo: "/events",
-    pathMatch: "full"
+    pathMatch: "full",
   } /** Prefix or Full only two options. */,
-  { path: "user", loadChildren: "./user/user.module#UserModule" }
+  { path: "user", loadChildren: "./user/user.module#UserModule" },
 ];

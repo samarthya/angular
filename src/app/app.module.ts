@@ -12,14 +12,14 @@ import {
   EventsListComponent,
   EventResolverService,
   EventsService,
-  CreateSessionComponent
+  CreateSessionComponent,
 } from "./events/index";
 import { EventsAppComponent } from "./events-app.component";
 
 import { NavBarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
-import { AuthService } from './user/auth.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from "./user/auth.service";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -35,13 +35,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventDetailsComponent,
     CreateEventComponent,
     CreateSessionComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   imports: [
     BrowserModule, // Browser specific services.
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [
     EventsService,
@@ -49,9 +49,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventResolverService,
     EventRouteActivator,
     AuthService,
-    { provide: "canDeactivateChecker", useValue: checkValueIsDirty }
+    { provide: "canDeactivateChecker", useValue: checkValueIsDirty },
   ],
-  bootstrap: [EventsAppComponent]
+  bootstrap: [EventsAppComponent],
 })
 
 /**
@@ -66,9 +66,10 @@ export class AppModule {}
  * Can deactivate checker implemented as a method instead of a class.
  */
 export function checkValueIsDirty(component: CreateEventComponent) {
-  if (component.isDirty)
+  if (component.isDirty) {
     return window.confirm(
-      " There are unsaved changes do you wish to continue?"
+      " There are unsaved changes do you wish to continue?",
     );
+  }
   return true;
 }

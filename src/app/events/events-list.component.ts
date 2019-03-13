@@ -1,10 +1,10 @@
-import { Component,OnInit } from '@angular/core';
-import { EventsService } from './shared/events.service';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
-import { ToastrService } from '../common/toastr.service';
-import { ActivatedRoute } from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { IEvent } from './shared';
+import { Component, OnInit } from "@angular/core";
+import { EventsService } from "./shared/events.service";
+import { toBase64String } from "@angular/compiler/src/output/source_map";
+import { ToastrService } from "../common/toastr.service";
+import { ActivatedRoute } from "@angular/router";
+import { routerNgProbeToken } from "@angular/router/src/router_module";
+import { IEvent } from "./shared";
 
 /**
  * Using global is not recommended and is neither testable.
@@ -12,7 +12,7 @@ import { IEvent } from './shared';
 // declare let toastr;
 
 @Component({
-  selector: 'events-list',
+  selector: "events-list",
   template: `
   <div>
     <h1>Upcoming Angular Events</h1>
@@ -33,13 +33,13 @@ import { IEvent } from './shared';
     .thumbnail {
       min-height: 210px;
     }
-    `
+    `,
 
-  ]
+  ],
 })
 
-export class EventsListComponent implements OnInit{
-  events: IEvent[];
+export class EventsListComponent implements OnInit {
+  public events: IEvent[];
 
     /**
      * Service injectors
@@ -48,21 +48,21 @@ export class EventsListComponent implements OnInit{
 
   }
 
-  getEvents() {
+  public getEvents() {
     return this.eventService.getEvents();
   }
 
-  ngOnInit() {
-    //this.eventService.getEvents().subscribe( events => this.events = events);
+  public ngOnInit() {
+    // this.eventService.getEvents().subscribe( events => this.events = events);
     /**
      * Since I have added a resolver fetching the information from the
      * resolved data.
      */
-    this.events = this.route.snapshot.data['events'];
+    this.events = this.route.snapshot.data.events;
   }
 
-  eventClicked(data: any) {
-    this.toastr.success(data.name)
-    console.warn('Event CLicked- Parent trap!' , data);
+  public eventClicked(data: any) {
+    this.toastr.success(data.name);
+    console.warn("Event CLicked- Parent trap!" , data);
   }
 }

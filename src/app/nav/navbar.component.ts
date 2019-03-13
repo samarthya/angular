@@ -13,6 +13,11 @@ import { Router } from '@angular/router';
       color: red;
       margin-left: 20px;
     }
+
+    a:hover {
+      color: crimson;
+      text-decoration: overline;
+    }
   `]
 })
 

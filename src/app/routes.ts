@@ -9,7 +9,8 @@ import {
   EventDetailsComponent,
   EventRouteActivator,
   EventsListComponent,
-  EventResolverService
+  EventResolverService,
+  CreateSessionComponent
 } from "./events/index";
 
 export const appRoutes: Routes = [
@@ -22,6 +23,10 @@ export const appRoutes: Routes = [
     path: "events/new",
     component: CreateEventComponent,
     canDeactivate: ["canDeactivateChecker"]
+  },
+  {
+    path: "events/session/new",
+    component: CreateSessionComponent
   },
   {
     path: "events/:id",

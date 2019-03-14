@@ -14,6 +14,9 @@ export interface IEvent {
   sessions: ISession[];
 }
 
+/**
+ * Session iterface;
+ */
 export interface ISession {
   id: number;
   name: string;

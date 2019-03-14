@@ -26,6 +26,10 @@ export class CreateEventComponent {
 
   }
 
+  /**
+   * Save the event.
+   * @param formValues : string[]
+   */
   public saveEvent(formValues: any) {
     // tslint:disable-next-line:no-console
     console.log(formValues);
@@ -35,6 +39,9 @@ export class CreateEventComponent {
     this.routerService.navigate(["events"]);
   }
 
+  /**
+   * Cancel button functionality
+   */
   public onCancel() {
     this.routerService.navigate(["events"]);
   }

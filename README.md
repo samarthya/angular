@@ -29,3 +29,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Learning so far
 
 * Never use ending commas with the **TSLINT** application. Make sure you **_DO NOT append any COMMAS_** at the end of last lines of any object or statement you are defining in the _tslint.json_
+* The basic building blocks of an Angular application are NgModules, which provide a compilation context for components.
+* Angular app is defined by a set of NgModules (related code).
+* An app always has at least a root module that enables bootstrapping, and typically has many more feature modules.
+* Component define view.
+* Decorators around the classes provide the metadata used by angular.
+* Two types of validators SYNC and ASYNC
+* You can then inspect the control's state by exporting ngModel to a local template variable. #myName=ngModel
+* Functional programming: programming paradigm where the output of the function is solely dependent on the input values of the function.

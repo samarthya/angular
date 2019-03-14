@@ -9,19 +9,16 @@ import { Router } from "@angular/router";
  */
 @Component({
   templateUrl: "./profile.component.html",
-  styles: [
-    `
+  styles: [`
       em {
-        float: right;
         color: crimson;
+        float: right;
         padding-left: 10px;
       }
-
       .error {
         background-color: coral;
       }
-    `,
-  ],
+    `],
 })
 
 export class ProfileComponent implements OnInit {
@@ -63,7 +60,7 @@ export class ProfileComponent implements OnInit {
    * Validates the first name.
    */
   public validateFirstName() {
-    return this.firstName.valid || this.firstName.untouched ;
+    return this.firstName.valid || this.firstName.untouched;
   }
 
   /**
@@ -76,7 +73,7 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.valid) {
       this.authService.updateProfile(
         this.profileForm.value.firstName,
-        this.profileForm.value.lastName,
+        this.profileForm.value.lastName
       );
       /** Once valid then we need to navigate to the Events page. */
       this.router.navigate(["events"]);
@@ -87,18 +84,18 @@ export class ProfileComponent implements OnInit {
    * On component initialize we need to add the first name and the last name and add to the form Group.
    */
   public ngOnInit() {
-    this.firstName = new FormControl(
-      this.authService.currentUser.firstName,
-      [Validators.required, Validators.pattern("^[a-zA-Z].*")],
-    );
+    this.firstName = new FormControl(this.authService.currentUser.firstName, [
+      Validators.required,
+      Validators.pattern("^[a-zA-Z].*")
+    ]);
     this.lastName = new FormControl(
       this.authService.currentUser.lastName,
-      Validators.required,
+      Validators.required
     );
 
     this.profileForm = new FormGroup({
       firstName: this.firstName,
-      lastName: this.lastName,
+      lastName: this.lastName
     });
   }
 }

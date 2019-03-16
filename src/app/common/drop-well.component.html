@@ -1,13 +1,11 @@
 <div class="well col-md-10">
   <h6 data-heading>
     {{title}}
-    <span *ngIf="!hide" (click)="toggleVisibility()" data-icon>
-      <i class="btn btn-primary fa fa-arrow-circle-up fa-2x"></i>
-    </span>
-
-    <span *ngIf="hide" (click)="toggleVisibility()" data-icon>
-        <i class="btn btn-primary fa fa-arrow-circle-down fa-2x"></i>
-    </span>
+    <span (click)="toggleVisibility()" data-icon>
+        <i class="btn btn-primary fa"
+        [ngClass]="{'fa-arrow-circle-up fa-2x': !hide, 'fa-arrow-circle-down fa-2x':hide}">
+        </i>
+      </span>
   </h6>
 
   <div *ngIf="!hide">

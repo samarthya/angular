@@ -11,6 +11,7 @@ import {
   EventsListComponent,
   EventResolverService,
   CreateSessionComponent,
+  SessionListComponent,
 } from "./events/index";
 
 export const appRoutes: Routes = [

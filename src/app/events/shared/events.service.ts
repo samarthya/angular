@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import { Subject } from "rxjs";
-import { IEvent } from "./event.model";
+import { IEvent, ISession } from "./event.model";
+import { SessionListComponent } from '../event-details';
 
 @Injectable()
 export class EventsService {
@@ -29,6 +30,9 @@ export class EventsService {
     EVENTS.push(newEvent);
   }
 
+  public addSession(event: IEvent){
+    EVENTS[event.id] = event;
+  }
   public getEvent(id: number): IEvent {
     return EVENTS.find((event) => event.id === id);
   }

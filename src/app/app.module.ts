@@ -21,6 +21,7 @@ import { NavBarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
 import { AuthService } from "./user/auth.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { DropWellComponent } from './common/drop-well.component';
 
 @NgModule({
   declarations: [
@@ -29,15 +30,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
      * be declared in this array. Only takes in declarables
      * and declareables are components, pipes and directives.
      */
+    ErrorComponent,
     EventsAppComponent,
     EventsListComponent,
-    SessionListComponent,
     EventThumbnailComponent,
     NavBarComponent,
     EventDetailsComponent,
     CreateEventComponent,
     CreateSessionComponent,
-    ErrorComponent,
+    SessionListComponent,
+    DropWellComponent,
   ],
   imports: [
     BrowserModule, // Browser specific services.

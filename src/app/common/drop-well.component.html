@@ -1,0 +1,7 @@
+<div class="info col-md-10 well">
+  <h1 (click)="toggleVisibility()">{{title}}</h1>
+  <div *ngIf="!hide" class="warning">
+      <ng-content></ng-content>
+  </div>
+
+</div>

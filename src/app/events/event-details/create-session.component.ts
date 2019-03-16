@@ -1,9 +1,11 @@
 import { Router } from "@angular/router";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { ISession, forbiddenName } from "../shared";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
+
 @Component({
+  selector: "create-session-component",
   templateUrl: "./create-session.component.html",
   styleUrls: ["./create.style.css"],
 })
@@ -21,8 +23,12 @@ export class CreateSessionComponent implements OnInit {
   public abstract: FormControl;
   public level: FormControl;
 
-  constructor(private router: Router) {
+  @Output() cancelClicked = new EventEmitter();
+  @Output() saveClicked = new EventEmitter();
+  constructor(private router: Router ) {
     console.log(" CreateSession ");
+    this.saveClicked = new EventEmitter();
+    this.cancelClicked = new EventEmitter();
   }
 
   /**
@@ -53,6 +59,7 @@ export class CreateSessionComponent implements OnInit {
 
   public onCancel(): void {
     this.router.navigate(["/events"]);
+    this.cancelClicked.emit(null);
   }
 
   public validate(control: string) {
@@ -77,5 +84,6 @@ export class CreateSessionComponent implements OnInit {
       presenter: formValues.presenter,
       voters: [],
     };
+    this.saveClicked.emit(newSession);
   }
 }

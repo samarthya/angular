@@ -1,5 +1,5 @@
 import { ValidatorFn, AbstractControl } from "@angular/forms";
-import { stringify } from "@angular/core/src/render3/util";
+
 
 /**
  * ValidatorFn - A function that receives a control and synchronously returns a map of
@@ -21,7 +21,7 @@ export function forbiddenName(names): ValidatorFn {
     console.log(faultingWords);
 
     return faultingWords && faultingWords.length > 0
-      ? { "forbiddenName": faultingWords.join(" OR ") }
+      ? { 'forbiddenName': faultingWords.join(" OR ") }
       : null;
   };
 }

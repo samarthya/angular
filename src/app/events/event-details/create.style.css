@@ -7,3 +7,7 @@ em {
 .error select, .error textarea, .error input {
   background-color: coral;
 }
+
+a{
+   cursor: pointer;
+ }

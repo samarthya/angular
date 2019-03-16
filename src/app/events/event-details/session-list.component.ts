@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ISession } from '../shared';
+import { DropWellComponent} from "../../common/drop-well.component";
 
 @Component({
   selector: "session-list",

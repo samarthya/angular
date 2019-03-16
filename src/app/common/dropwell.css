@@ -1,0 +1,14 @@
+i:hover {
+  cursor: pointer;
+  border: 1px solid blanchedalmond;
+  background-color: blue;
+}
+
+[data-icon] {
+  margin-top: .2em;
+  float: right;
+}
+
+[data-heading] {
+  min-height: 3em;
+}

@@ -13,7 +13,12 @@ export class DropWellComponent {
   @Input() title: string;
   hide: boolean;
 
+  constructor() {
+    this.hide = true;
+  }
+
   public toggleVisibility() {
-    this.hide = !HighlightDelayBarrier;
+    this.hide = !this.hide;
+    console.log(this.hide)
   }
 }

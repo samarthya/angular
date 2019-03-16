@@ -21,4 +21,16 @@ export class DropWellComponent {
     this.hide = !this.hide;
     console.log(this.hide)
   }
+
+  /**
+   * Returns the classes to apply in case of
+   * the dropdown button.
+   */
+  public getToggleClasses(): string {
+    if (!this.hide) {
+      return "fa-arrow-circle-up fa-2x";
+    }else {
+      return "fa-arrow-circle-down fa-2x"
+    }
+  }
 }

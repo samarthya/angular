@@ -37,3 +37,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * Two types of validators SYNC and ASYNC
 * You can then inspect the control's state by exporting ngModel to a local template variable. #myName=ngModel
 * Functional programming: programming paradigm where the output of the function is solely dependent on the input values of the function.
+* Components and Directives have a life cycle.
+* NgOnInit - Angular calls this hook shortly after the component is created.

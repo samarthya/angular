@@ -4,7 +4,7 @@
     {{title}}
     <span (click)="toggleVisibility()" data-icon>
         <i class="btn btn-primary fa"
-        [ngClass]="{'fa-arrow-circle-up fa-2x': !hide, 'fa-arrow-circle-down fa-2x':hide}">
+        [ngClass]="getToggleClasses()">
         </i>
       </span>
   </h6>

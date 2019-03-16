@@ -9,6 +9,9 @@ import { DropWellComponent} from "../../common/drop-well.component";
     a {
       cursor: pointer;
     }
+    [well-title] {
+      display: inline;
+    }
   `],
 })
 

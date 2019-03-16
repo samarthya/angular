@@ -1,14 +1,14 @@
 <!-- Multiple slot projection -->
 <div class="well col-md-10">
-  <h6 data-heading>
-    {{title}}
+
+  <h4 data-heading>
     <span (click)="toggleVisibility()" data-icon>
-        <i class="btn btn-primary fa"
-        [ngClass]="getToggleClasses()">
-        </i>
-      </span>
-  </h6>
+      <i class="btn btn-primary fa" [ngClass]="getToggleClasses()"></i>
+    </span>
+    <ng-content select="[well-title]" data-title></ng-content>
+  </h4>
+
   <div *ngIf="!hide">
-      <ng-content></ng-content>
+    <ng-content select="[well-body]"></ng-content>
   </div>
 </div>

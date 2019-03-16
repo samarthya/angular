@@ -6,9 +6,12 @@ i:hover {
 
 [data-icon] {
   margin-top: .2em;
-  float: right;
 }
 
 [data-heading] {
   min-height: 3em;
+}
+
+[data-title] {
+  display: inline;
 }

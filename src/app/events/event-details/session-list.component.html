@@ -1,17 +1,24 @@
 <div class="row" *ngFor="let session of sessions">
-    <div class="col-md-10">
-      <drop-well [title]="session.name">
+  <div class="col-md-10">
+    <drop-well>
+
+      <div well-title>
+        {{session.name}}
+        <i class="fa fa-fire fa-1x alert-danger" aria-hidden="true" *ngIf="session.voters.length > 3"></i>
+      </div>
+
+      <div well-body>
+        <span>Duration: {{session.duration}}</span><br />
+        <span>Level: {{session.level}}</span>
+        <p>{{session.abstract}}</p>
+      </div>
+    </drop-well>
+
+    <!-- <drop-well [title]="session.name">
           <h6>{{session.presenter}}</h6>
           <span>Duration: {{session.duration}}</span><br />
           <span>Level: {{session.level}}</span>
           <p>{{session.abstract}}</p>
-      </drop-well>
-      <!-- <div class="well">
-          <h4>{{session.name}}</h4>
-          <h6>{{session.presenter}}</h6>
-          <span>Duration: {{session.duration}}</span><br />
-          <span>Level: {{session.level}}</span>
-          <p>{{session.abstract}}</p>
-      </div> -->
-    </div>
+      </drop-well> -->
   </div>
+</div>

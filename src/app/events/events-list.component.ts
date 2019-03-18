@@ -1,9 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { EventsService } from "./shared/events.service";
 import { toBase64String } from "@angular/compiler/src/output/source_map";
-import { ToastrService } from "../common/toastr.service";
+
 import { ActivatedRoute } from "@angular/router";
-import { routerNgProbeToken } from "@angular/router/src/router_module";
 import { IEvent } from "./shared";
 
 /**
@@ -23,8 +22,7 @@ import { IEvent } from "./shared";
       Structural directice: Changes the DOM
       -->
       <event-thumbnail [routerLink]="['/events',event.id]" class="col col-md-5" *ngFor = "let event of events"
-                      [event]="event"
-                      (click)="eventClicked(event)"></event-thumbnail>
+                      [event]="event"></event-thumbnail>
     </div>
   </div>
   `,
@@ -44,7 +42,8 @@ export class EventsListComponent implements OnInit {
     /**
      * Service injectors
      */
-  constructor(private eventService: EventsService, private toastr: ToastrService, private route: ActivatedRoute) {
+  constructor(private eventService: EventsService,
+    private route: ActivatedRoute) {
 
   }
 
@@ -59,10 +58,5 @@ export class EventsListComponent implements OnInit {
      * resolved data.
      */
     this.events = this.route.snapshot.data.events;
-  }
-
-  public eventClicked(data: any) {
-    this.toastr.success(data.name);
-    console.warn("Event CLicked- Parent trap!" , data);
   }
 }

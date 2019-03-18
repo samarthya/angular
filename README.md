@@ -39,3 +39,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * Functional programming: programming paradigm where the output of the function is solely dependent on the input values of the function.
 * Components and Directives have a life cycle.
 * NgOnInit - Angular calls this hook shortly after the component is created.
+* Dependency injection - DI - Where a class asks for its dependency from an external provider.

@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { ToastrService } from "./common/toastr.service";
+import { TOASTR_TOKEN } from "./common/toastr.service";
 import { ErrorComponent } from "./errors/error.component";
 
 import {
@@ -23,6 +23,9 @@ import { appRoutes } from "./routes";
 import { AuthService } from "./user/auth.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DropWellComponent } from './common/drop-well.component';
+
+
+declare let toastr: any;
 
 @NgModule({
   declarations: [
@@ -51,7 +54,7 @@ import { DropWellComponent } from './common/drop-well.component';
   ],
   providers: [
     EventsService,
-    ToastrService,
+    {provide: TOASTR_TOKEN, useValue: toastr},
     EventResolverService,
     EventRouteActivator,
     AuthService,

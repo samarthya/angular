@@ -3,7 +3,9 @@ import { CanActivate, Router } from "@angular/router";
 import { EventsService } from "../shared/events.service";
 import {ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree} from "@angular/router";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class EventRouteActivator implements CanActivate {
   constructor(private eventService: EventsService, private router: Router) {
 

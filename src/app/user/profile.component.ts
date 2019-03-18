@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
 
+import { TOASTR_TOKEN, IToastr } from "../common/toastr.service";
 /**
  * Profile component - Allows the user to edit the first name and the user name
  * for the logged in user.
@@ -40,7 +41,9 @@ export class ProfileComponent implements OnInit {
    */
   public firstName: FormControl;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router, @Inject(TOASTR_TOKEN) private toasterService: IToastr) {}
 
   /**
    * On cancel method that has been bound to the btnCancel
@@ -76,7 +79,8 @@ export class ProfileComponent implements OnInit {
         this.profileForm.value.lastName
       );
       /** Once valid then we need to navigate to the Events page. */
-      this.router.navigate(["events"]);
+      //this.router.navigate(["events"]);
+      this.toasterService.info(" Profile updated.");
     }
   }
 

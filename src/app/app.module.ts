@@ -14,6 +14,7 @@ import {
   EventsService,
   CreateSessionComponent,
   SessionListComponent,
+  DurationPipe,
 } from "./events/index";
 import { EventsAppComponent } from "./events-app.component";
 
@@ -40,6 +41,7 @@ import { DropWellComponent } from './common/drop-well.component';
     CreateSessionComponent,
     SessionListComponent,
     DropWellComponent,
+    DurationPipe,
   ],
   imports: [
     BrowserModule, // Browser specific services.

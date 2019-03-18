@@ -10,8 +10,14 @@ i:hover {
 
 [data-heading] {
   min-height: 3em;
+  background-color: darkgrey;
 }
 
 [data-title] {
   display: inline;
+  background-color: dimgray;
+}
+
+span > i {
+  margin: 4px;
 }

@@ -7,10 +7,10 @@ import { IEvent } from "./shared";
   template: `
   <div>
   <div class="well hoverwell thumbnail">
-    <h2> {{event.name}}</h2>
+    <h2> {{event.name | uppercase}}</h2>
     <div>Date: {{event.date}}</div>
     <div>Time: {{event.time}}</div>
-    <div>Price: \${{event.price}}</div>
+    <div>Price: {{event.price | currency}}</div>
   </div>
   <button class="btn btn-primary" (click)="handleClickMe()">Click Me!</button>
   </div>

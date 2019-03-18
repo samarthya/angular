@@ -14,18 +14,36 @@ import { IEvent, ISession } from "../shared";
       .event-image {
         height: 100px;
       }
+
+      button {
+        margin-right: 2px;
+      }
+
+      [data-title] {
+        margin-top: 3px;
+        font-size: 1.5em;
+        font-family: cursive;
+      }
     `
   ]
 })
+/**
+ * Display the event and the session details. It uses
+ * the SessionList component as the child component.
+ */
 export class EventDetailsComponent {
   public event: IEvent;
   public addMode: boolean;
+  public filterBy: string;
+  public sortBy: string;
 
   constructor(
     private eventService: EventsService,
     private route: ActivatedRoute
   ) {
     this.addMode = false;
+    this.filterBy = "all";
+    this.sortBy = "votes";
   }
 
   public ngOnInit() {
@@ -38,9 +56,12 @@ export class EventDetailsComponent {
 
   public onSaveClicked(session: ISession) {
     console.log(session);
-    const maxID: number = Math.max.apply(null, this.event.sessions.map(session=> {
-      session.id
-    }));
+    const maxID: number = Math.max.apply(
+      null,
+      this.event.sessions.map(session => {
+        session.id;
+      })
+    );
     console.log(maxID);
 
     session.id = maxID + 1;

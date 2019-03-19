@@ -4,23 +4,39 @@
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" autocomplete="off" novalidate aria-autocomplete="none">
     <div class="form-group" >
       <label for="userName">User Name:</label>
-      <em *ngIf="!loginForm.controls.userName?.valid && !loginForm.controls.userName?.pristine">Required</em>
+      <em *ngIf="!loginForm.controls.userName?.valid && !loginForm.controls.userName?.pristine">
+        Required
+      </em>
       <!--
         Angular provides the NgModel directive that allows us to bind the data.
-        () -> HTML to component binding, typically events.
+        () -> HTML page to component binding, typically events.
         [] -> attribute binding, from component to the page.
       -->
-      <input [(ngModel)]="userName" name="userName" id="userName"
-      required type="text" class="form-control" placeholder="User Name..." autocomplete="off" />
-    </div>
-    <div class="form-group" >
-      <label for="password">Password:</label>
-      <em *ngIf="!loginForm.controls.password?.valid && (!loginForm.controls.password?.pristine || mouseHelp)">Required</em>
-      <input id="password" required  [(ngModel)]="password" name="password"
-      required type="password" class="form-control"placeholder="Password..." autocomplete="off"/>
+      <input [(ngModel)]="userName"
+            name="userName"
+            id="userName"
+            required
+            type="text"
+            class="form-control"
+            placeholder="User Name..." />
     </div>
 
-    <span (mouseenter)="mouseHelp=true" (mouseleave)="mouseHelp=false"><button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button></span>
-    <button type="button" (click)="onCancel()" class="btn btn-secondary btn-default" id="btnCancel">Cancel</button>
+    <div class="form-group" >
+      <label for="password">Password:</label>
+      <!-- Validation errors -->
+      <em *ngIf="!loginForm.controls.password?.valid && (!loginForm.controls.password?.pristine || mouseHelp)">
+        Required
+      </em>
+      <input id="password" required  [(ngModel)]="password"
+              name="password" required type="password"
+              class="form-control"placeholder="Password..." autocomplete="off"/>
+    </div>
+
+    <span (mouseenter)="mouseHelp=true" (mouseleave)="mouseHelp=false">
+      <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
+    </span>
+    <button type="button" (click)="onCancel()" class="btn btn-secondary btn-default" id="btnCancel">
+      Cancel
+    </button>
   </form>
 </div>

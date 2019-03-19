@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { TOASTR_TOKEN } from "./common/toastr.service";
+import { TOASTR_TOKEN, JQ_TOKEN, DropWellComponent, IToastr, ModelDialogComponent } from "./common/index";
 import { ErrorComponent } from "./errors/error.component";
 
 import {
@@ -22,10 +22,12 @@ import { NavBarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
 import { AuthService } from "./user/auth.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { DropWellComponent } from './common/drop-well.component';
+import { ModalTriggerDirective } from './common/modal.trigger.component';
 
 
-declare let toastr: any;
+
+let toastr: IToastr = window['toastr'];
+let jQuery: Object = window['$'];
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ declare let toastr: any;
     SessionListComponent,
     DropWellComponent,
     DurationPipe,
+    ModelDialogComponent,
+    ModalTriggerDirective,
   ],
   imports: [
     BrowserModule, // Browser specific services.
@@ -55,6 +59,7 @@ declare let toastr: any;
   providers: [
     EventsService,
     {provide: TOASTR_TOKEN, useValue: toastr},
+    {provide: JQ_TOKEN, useValue: jQuery},
     EventResolverService,
     EventRouteActivator,
     AuthService,

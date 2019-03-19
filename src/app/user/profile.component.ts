@@ -2,8 +2,8 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
-
 import { TOASTR_TOKEN, IToastr } from "../common/toastr.service";
+
 /**
  * Profile component - Allows the user to edit the first name and the user name
  * for the logged in user.
@@ -41,6 +41,9 @@ export class ProfileComponent implements OnInit {
    */
   public firstName: FormControl;
 
+  /**
+   * Constructor
+   */
   constructor(
     private authService: AuthService,
     private router: Router, @Inject(TOASTR_TOKEN) private toasterService: IToastr) {}

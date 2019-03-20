@@ -1,0 +1,10 @@
+<div class="pointable votingWidgetContainer" (click)="OnClick()">
+  <div class="well votingWidget">
+    <div class="votingButton">
+      <i class= "fa" [ngClass]="{'fa-heart': voted, 'fa-heart': !voted}" [style.color]="iconColor" aria-hidden="true"></i>
+    </div>
+    <div class="badge badge-inverse votingCount">
+      {{count}}
+    </div>
+  </div>
+</div>

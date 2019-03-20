@@ -1,7 +1,12 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { TOASTR_TOKEN, JQ_TOKEN, DropWellComponent, IToastr, ModelDialogComponent } from "./common/index";
+import { TOASTR_TOKEN,
+  JQ_TOKEN,
+  DropWellComponent,
+  IToastr,
+  ModelDialogComponent,
+  ModalTriggerDirective, VoterService } from "./common/index";
 import { ErrorComponent } from "./errors/error.component";
 
 import {
@@ -22,7 +27,8 @@ import { NavBarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
 import { AuthService } from "./user/auth.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ModalTriggerDirective } from './common/modal.trigger.component';
+
+import { UpvoteComponent } from './events/event-details/upvote.component';
 
 
 
@@ -49,6 +55,7 @@ let jQuery: Object = window['$'];
     DurationPipe,
     ModelDialogComponent,
     ModalTriggerDirective,
+    UpvoteComponent,
   ],
   imports: [
     BrowserModule, // Browser specific services.
@@ -63,6 +70,7 @@ let jQuery: Object = window['$'];
     EventResolverService,
     EventRouteActivator,
     AuthService,
+    VoterService,
     { provide: "canDeactivateChecker", useValue: checkValueIsDirty },
   ],
   bootstrap: [EventsAppComponent],

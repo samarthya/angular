@@ -1,5 +1,8 @@
 <div class="row container well" *ngFor="let session of visibleSession">
-  <div class="col-md-12">
+  <div class="col-md-1" *ngIf="authService.isAuthenticated()">
+    <upvote (vote)="toggleVote(session)" [count]="session.voters.length" [voted]="userHasVoted(session)"></upvote>
+  </div>
+  <div class="col-md-10">
     <drop-well>
       <div well-title>
         {{session.name}}

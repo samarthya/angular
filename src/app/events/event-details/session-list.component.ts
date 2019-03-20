@@ -1,36 +1,43 @@
-import { Component, Input, OnChanges } from '@angular/core';
-import { ISession } from '../shared';
-
+import { Component, Input, OnChanges } from "@angular/core";
+import { ISession } from "../shared";
+import { AuthService } from "src/app/user/auth.service";
+import { VoterService } from "src/app/common";
 
 @Component({
   selector: "session-list",
   templateUrl: "./session-list.component.html",
-  styles: [`
-    a {
-      cursor: pointer;
-    }
-    [well-title] {
-      display: inline;
-    }
-  `],
+  styles: [
+    `
+      a {
+        cursor: pointer;
+      }
+      [well-title] {
+        display: inline;
+      }
+    `
+  ]
 })
-
-export class SessionListComponent implements OnChanges{
+export class SessionListComponent implements OnChanges {
   @Input() sessions: ISession[];
   @Input() filterBy: string;
   @Input() sortBy: string;
 
   public visibleSession: ISession[] = [];
 
-  constructor() {
+  constructor(
+    public authService: AuthService,
+    private voterService: VoterService
+  ) {
     console.log(" Session List component.");
   }
 
   ngOnChanges() {
-    console.log(' NgOnChanges called');
-    if(this.sessions){
+    console.log(" NgOnChanges called");
+    if (this.sessions) {
       this.filterSessions(this.filterBy);
-      this.sortBy === 'votes' ? this.visibleSession.sort(this.sortByVotes): this.visibleSession.sort(this.sortByName);
+      this.sortBy === "votes"
+        ? this.visibleSession.sort(this.sortByVotes)
+        : this.visibleSession.sort(this.sortByName);
     }
   }
 
@@ -42,24 +49,55 @@ export class SessionListComponent implements OnChanges{
   }
 
   private sortByName(s1: ISession, s2: ISession) {
-    if(s1.name < s2.name){
+    if (s1.name < s2.name) {
       return -1;
-    } else if(s1.name > s2.name){
+    } else if (s1.name > s2.name) {
       return 1;
-    } else if(s1.name === s2.name){
+    } else if (s1.name === s2.name) {
       return 0;
     }
   }
 
-  private filterSessions(filterSessionBy: string){
-    console.log( ' Filter -> : ' + filterSessionBy);
-    if(filterSessionBy === 'all') {
+  private filterSessions(filterSessionBy: string) {
+    if (filterSessionBy === "all") {
       this.visibleSession = this.sessions.slice(0);
     } else {
-      this.visibleSession = this.sessions.filter( s => {
-        console.log(' Session: ' + s.level.toLocaleLowerCase() );
-        return s.level.toLocaleLowerCase() === filterSessionBy.toString().trim();
+      this.visibleSession = this.sessions.filter(s => {
+        console.log(" Session: " + s.level.toLocaleLowerCase());
+        return (
+          s.level.toLocaleLowerCase() === filterSessionBy.toString().trim()
+        );
       });
+    }
+  }
+
+  /**
+   * Has the user voted.
+   */
+  private userHasVoted(session: any): boolean {
+
+    return this.voterService.userHasVoted(
+        session,
+        this.authService.currentUser.userName
+      );
+
+  }
+
+  public toggleVote(session: ISession) {
+    if (this.userHasVoted(session)) {
+      this.voterService.deleteVoter(
+        session,
+        this.authService.currentUser.userName
+      );
+    } else {
+      this.voterService.addVoter(
+        session,
+        this.authService.currentUser.userName
+      );
+    }
+
+    if (this.sortBy == "votes") {
+      this.visibleSession.sort(this.sortByVotes);
     }
   }
 }

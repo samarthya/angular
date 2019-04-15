@@ -20,7 +20,7 @@ export class EventResolverService implements Resolve<any> {
      * and we just map to it.
      * Subscribe returns a subscription and not an observable.
      */
-    return this.eventService.getEvents().pipe(map((events) => events));
+    return this.eventService.getEvents();
   }
 
 }

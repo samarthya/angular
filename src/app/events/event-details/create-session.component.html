@@ -8,7 +8,7 @@
         <em *ngIf="name.invalid && name.dirty && !!name.errors.required">Required</em>
         <!-- Custom validator that has been defined by me. -->
         <em *ngIf="name.dirty && !!name?.errors?.forbiddenName">
-            Error: Forbidden to use - {{ name?.errors?.forbiddenName }}
+            Error: Forbidden to use - {{ getErrors() }}
         </em>
         <input id="sessionName" type="text" class="form-control" placeholder="session name..." formControlName="name"/>
       </div>

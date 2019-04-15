@@ -16,7 +16,13 @@ import { EventsService, IEvent } from "./shared";
     }
   `],
 })
-
+/**
+ * Angular forms allow you to:
+ * Capture the current value and validation status of a form.
+ * Track and listen for changes to the form's data model.
+ * Validate the correctness of user input.
+ * Create custom validators and input elements.
+ */
 export class CreateEventComponent {
   public isDirty: boolean = false;
   public newEventForm: NgForm;

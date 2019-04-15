@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config ./src/proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "tlint": "tlint .",
-    "doc": "npx compodoc -s -p ./tsconfig.json -n 'Angular Application'"
+    "doc": "compodoc -s -p ./tsconfig.json -n 'Angular Application'"
   },
   "private": true,
   "dependencies": {

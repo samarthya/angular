@@ -1,10 +1,16 @@
 import { Injectable, EventEmitter } from "@angular/core";
-import { Subject } from "rxjs";
+import { Subject, Observable, of } from "rxjs";
 import { IEvent, ISession } from "./event.model";
 import { SessionListComponent } from "../event-details";
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class EventsService {
+
+  constructor(private httpService: HttpClient) {
+
+  }
   /** Synchronous implementation of the component. */
   // getEvents() {
   //   return EVENTS;
@@ -12,17 +18,28 @@ export class EventsService {
   /**
    * Asynchronous implementation.
    */
-  public getEvents(): Subject<IEvent[]> {
-    const subject = new Subject<IEvent[]>();
+  // public getEvents(): Subject<IEvent[]> {
+  //   const subject = new Subject<IEvent[]>();
 
-    setTimeout(() => {
-      subject.next(EVENTS);
-      subject.complete();
-    }, 100);
+  //   setTimeout(() => {
+  //     subject.next(EVENTS);
+  //     subject.complete();
+  //   }, 100);
 
-    return subject;
+  //   return subject;
+  // }
+  private handleError<T> (operation ='Operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    }
   }
 
+  public getEvents(): Observable<IEvent[]> {
+    return this.httpService.get<IEvent[]>('/api/ets').
+      pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
+  }
+  
   public saveEvent(newEvent: any) {
     newEvent.id = 999;
     newEvent.sessions = [];

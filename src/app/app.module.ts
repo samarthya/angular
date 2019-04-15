@@ -6,7 +6,8 @@ import { TOASTR_TOKEN,
   DropWellComponent,
   IToastr,
   ModelDialogComponent,
-  ModalTriggerDirective, VoterService } from "./common/index";
+  ModalTriggerDirective,
+  VoterService } from "./common/index";
 import { ErrorComponent } from "./errors/error.component";
 
 import {
@@ -20,6 +21,7 @@ import {
   CreateSessionComponent,
   SessionListComponent,
   DurationPipe,
+  LocationValidator,
 } from "./events/index";
 import { EventsAppComponent } from "./events-app.component";
 
@@ -27,9 +29,9 @@ import { NavBarComponent } from "./nav/navbar.component";
 import { appRoutes } from "./routes";
 import { AuthService } from "./user/auth.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-
 import { UpvoteComponent } from './events/event-details/upvote.component';
 
+import { HttpClientModule } from '@angular/common/http';
 
 
 let toastr: IToastr = window['toastr'];
@@ -56,12 +58,14 @@ let jQuery: Object = window['$'];
     ModelDialogComponent,
     ModalTriggerDirective,
     UpvoteComponent,
+    LocationValidator
   ],
   imports: [
     BrowserModule, // Browser specific services.
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   ],
   providers: [
     EventsService,

@@ -43,7 +43,7 @@ export class EventDetailsComponent {
   ) {
     this.addMode = false;
     this.filterBy = "all";
-    this.sortBy = "votes";
+    this.sortBy = "name";
   }
 
   public ngOnInit() {

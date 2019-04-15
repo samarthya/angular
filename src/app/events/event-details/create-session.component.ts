@@ -69,6 +69,9 @@ export class CreateSessionComponent implements OnInit {
     }
   }
 
+  public getErrors(): any {
+    return this.name.errors.forbiddenName;
+  }
   /**
    * On NGSUBMIT this method will be called.
    * @param formValues

@@ -5,6 +5,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
   templateUrl: "./upvote.component.html",
   styleUrls: ['./upvote.css']
 })
+
 export class UpvoteComponent {
   @Input() count: number;
   @Input() set voted(val){

@@ -11,23 +11,7 @@ export class EventsService {
   constructor(private httpService: HttpClient) {
 
   }
-  /** Synchronous implementation of the component. */
-  // getEvents() {
-  //   return EVENTS;
-  // }
-  /**
-   * Asynchronous implementation.
-   */
-  // public getEvents(): Subject<IEvent[]> {
-  //   const subject = new Subject<IEvent[]>();
 
-  //   setTimeout(() => {
-  //     subject.next(EVENTS);
-  //     subject.complete();
-  //   }, 100);
-
-  //   return subject;
-  // }
   private handleError<T> (operation ='Operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
@@ -35,11 +19,19 @@ export class EventsService {
     }
   }
 
+  /**
+   * Gets all the events from the backend.
+   */
   public getEvents(): Observable<IEvent[]> {
     return this.httpService.get<IEvent[]>('/api/ets').
       pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
   }
-  
+
+  public getEvent(id: number): Observable<IEvent> {
+    return this.httpService.get<IEvent>('/api/ets/' + id).
+    pipe(catchError(this.handleError<IEvent>('getEvent')));
+  }
+
   public saveEvent(newEvent: any) {
     newEvent.id = 999;
     newEvent.sessions = [];
@@ -50,9 +42,7 @@ export class EventsService {
     EVENTS[event.id] = event;
   }
 
-  public getEvent(id: number): IEvent {
-    return EVENTS.find(event => event.id === id);
-  }
+
 
   /**
    * Search for the term in the session of the events (all events.)

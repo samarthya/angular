@@ -52,10 +52,8 @@ export class EventDetailsComponent {
 
   private resetState() {
     this.route.params.subscribe((params: Params) => {
-      this.eventService.getEvent(+params['id']).subscribe( ( event:IEvent )=> {
-        this.event = event
-        this.addMode = false;
-      });
+      this.event = this.route.snapshot.data['event'];
+      this.addMode = false;
     });
   }
   public onAddSession() {

@@ -7,10 +7,10 @@ import { ErrorComponent } from "./errors/error.component";
 import {
   CreateEventComponent,
   EventDetailsComponent,
-  EventRouteActivator,
   EventsListComponent,
   EventResolverService,
   CreateSessionComponent,
+  EventsResolver,
   SessionListComponent,
 } from "./events/index";
 
@@ -32,7 +32,7 @@ export const appRoutes: Routes = [
   {
     path: "events/:id",
     component: EventDetailsComponent,
-    canActivate: [EventRouteActivator],
+    resolve: {event: EventsResolver}
   },
   { path: "404", component: ErrorComponent },
   {

@@ -13,7 +13,6 @@ import { ErrorComponent } from "./errors/error.component";
 import {
   CreateEventComponent,
   EventDetailsComponent,
-  EventRouteActivator,
   EventThumbnailComponent,
   EventsListComponent,
   EventResolverService,
@@ -22,6 +21,7 @@ import {
   SessionListComponent,
   DurationPipe,
   LocationValidator,
+  EventsResolver,
 } from "./events/index";
 import { EventsAppComponent } from "./events-app.component";
 
@@ -72,7 +72,7 @@ let jQuery: Object = window['$'];
     {provide: TOASTR_TOKEN, useValue: toastr},
     {provide: JQ_TOKEN, useValue: jQuery},
     EventResolverService,
-    EventRouteActivator,
+    EventsResolver,
     AuthService,
     VoterService,
     { provide: "canDeactivateChecker", useValue: checkValueIsDirty },

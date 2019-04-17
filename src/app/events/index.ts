@@ -4,3 +4,4 @@ export * from "./event-thumbnail.component";
 export * from "./event-details/index";
 export * from "./shared/index";
 export * from "./location.validator";
+export * from "./event-resolver.service";

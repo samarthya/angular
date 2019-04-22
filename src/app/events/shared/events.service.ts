@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from "@angular/core";
 import { Subject, Observable, of } from "rxjs";
 import { IEvent, ISession } from "./event.model";
 import { SessionListComponent } from "../event-details";
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpSentEvent, HttpProgressEvent, HttpHeaderResponse, HttpResponse, HttpUserEvent } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -32,53 +32,27 @@ export class EventsService {
     pipe(catchError(this.handleError<IEvent>('getEvent')));
   }
 
-  public saveEvent(newEvent: any) {
-    newEvent.id = 999;
-    newEvent.sessions = [];
-    EVENTS.push(newEvent);
+  public searchSessions(searchTerm: string) : Observable<ISession[]>{
+    let results: ISession[] = [];
+    let term = searchTerm.toLocaleLowerCase();
+    let matchingSessions: any;
+
+    return this.httpService.get<ISession[]>('/api/sessions?search=' + searchTerm).
+      pipe(catchError(this.handleError<ISession[]>('searchSessions', [])));
+
+  }
+
+  public saveEvent(newEvent: any): Observable<IEvent| HttpSentEvent | HttpProgressEvent | HttpSentEvent | HttpHeaderResponse | HttpResponse<IEvent> | HttpUserEvent<IEvent>> {
+    let options: any = {header: new HttpHeaders({'Content-Type': 'application/json'})};
+
+    return this.httpService.post<IEvent>('/api/ets', event, options).
+    pipe(catchError(this.handleError<IEvent>('saveEvent')));
   }
 
   public addSession(event: IEvent) {
     EVENTS[event.id] = event;
   }
 
-
-
-  /**
-   * Search for the term in the session of the events (all events.)
-   */
-  public searchSessions(searchTerm: string) {
-    let results: ISession[] = [];
-    let term = searchTerm.toLocaleLowerCase();
-    let matchingSessions: any;
-
-    EVENTS.forEach(event => {
-      matchingSessions = event.sessions.filter(
-        session =>
-          session.name.toLocaleLowerCase().indexOf(term) > -1 );
-
-      console.log(matchingSessions);
-
-      matchingSessions = matchingSessions.map((x: any) => {
-        x.eventId = event.id;
-        return x;
-      });
-
-      if(matchingSessions) {
-        console.log( ' Matched: ' + JSON.stringify(matchingSessions));
-        results = results.concat(matchingSessions);
-      }
-
-    });
-
-    console.log(results);
-    let evntEmitter = new EventEmitter(true);
-    setTimeout(() => {
-      evntEmitter.emit(results);
-    }, 1000);
-
-    return evntEmitter;
-  }
 }
 
 const EVENTS: IEvent[] = [

@@ -24,14 +24,22 @@ export class LoginComponent {
   public userName: string;
   public password: string;
 
+  public loginInvalid: boolean = false;
+
   constructor(private authService: AuthService, private router: Router) {
     this.mouseHelp = false;
   }
 
   public login(loginForm: NgForm) {
     console.log(loginForm.value);
-    this.authService.loginUser(loginForm.value.userName, loginForm.value.password);
-    this.router.navigate(["events"]);
+    this.authService.loginUser(loginForm.value.userName, loginForm.value.password).subscribe(response => {
+      if(!response){
+        this.loginInvalid = true;
+      } else {
+        this.router.navigate(["events"]);
+      }
+    });
+
   }
 
   public onCancel() {

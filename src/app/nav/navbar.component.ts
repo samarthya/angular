@@ -33,13 +33,12 @@ export class NavBarComponent {
     this.eventService.searchSessions(searchTerm).subscribe( (sessionFound: any) => {
       this.sessionsFound = sessionFound;
     });
-
-    console.log(this.sessionsFound);
   }
 
   protected isSearchTermValid(): boolean {
     return this.searchTerm.length > 0;
   }
+
   public constructor(
     public authService: AuthService,
     private eventService: EventsService) {

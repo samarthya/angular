@@ -51,8 +51,8 @@ export class EventDetailsComponent {
   }
 
   private resetState() {
-    this.route.params.subscribe((params: Params) => {
-      this.event = this.route.snapshot.data['event'];
+    this.route.data.subscribe((data) => {
+      this.event = data['event'];
       this.addMode = false;
     });
   }
@@ -72,6 +72,9 @@ export class EventDetailsComponent {
 
     session.id = maxID + 1;
     this.event.sessions.push(session);
+    this.eventService.saveEvent(this.event).subscribe(event => {
+      console.log(" Event saved ");
+    });
     this.addMode = false;
   }
 

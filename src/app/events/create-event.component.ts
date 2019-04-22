@@ -41,8 +41,11 @@ export class CreateEventComponent {
     console.log(formValues);
     // TODO: Remove the console.log
 
-    this.eventService.saveEvent(formValues);
-    this.routerService.navigate(["events"]);
+    this.eventService.saveEvent(formValues).subscribe(event => {
+      this.isDirty = true;
+      this.routerService.navigate(["events"]);
+    });
+
   }
 
   /**

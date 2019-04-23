@@ -3,11 +3,9 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "./auth.service";
 import { Router } from "@angular/router";
 import { TOASTR_TOKEN, IToastr } from "../common/toastr.service";
+import { IUser } from './user.model';
 
-/**
- * Profile component - Allows the user to edit the first name and the user name
- * for the logged in user.
- */
+
 @Component({
   templateUrl: "./profile.component.html",
   styles: [`
@@ -19,9 +17,16 @@ import { TOASTR_TOKEN, IToastr } from "../common/toastr.service";
       .error {
         background-color: coral;
       }
+      #logout {
+        float: right;
+      }
     `],
 })
 
+/**
+ * Profile component - Allows the user to edit the first name and the user name
+ * for the logged in user.
+ */
 export class ProfileComponent implements OnInit {
   /**
    * The FORM that will be used.
@@ -80,10 +85,13 @@ export class ProfileComponent implements OnInit {
       this.authService.updateProfile(
         this.profileForm.value.firstName,
         this.profileForm.value.lastName
-      );
-      /** Once valid then we need to navigate to the Events page. */
+      ).subscribe( (user: IUser) => {
+        console.log(" User saved: " + user);
+        /** Once valid then we need to navigate to the Events page. */
       //this.router.navigate(["events"]);
       this.toasterService.info(" Profile updated.");
+      });
+
     }
   }
 
@@ -91,18 +99,27 @@ export class ProfileComponent implements OnInit {
    * On component initialize we need to add the first name and the last name and add to the form Group.
    */
   public ngOnInit() {
-    this.firstName = new FormControl(this.authService.currentUser.firstName, [
-      Validators.required,
-      Validators.pattern("^[a-zA-Z].*")
-    ]);
-    this.lastName = new FormControl(
-      this.authService.currentUser.lastName,
-      Validators.required
-    );
 
-    this.profileForm = new FormGroup({
-      firstName: this.firstName,
-      lastName: this.lastName
+      this.firstName = new FormControl(this.authService.currentUser.firstName, [
+        Validators.required,
+        Validators.pattern("^[a-zA-Z].*")
+      ]);
+      this.lastName = new FormControl(
+        this.authService.currentUser.lastName,
+        Validators.required
+      );
+
+      this.profileForm = new FormGroup({
+        firstName: this.firstName,
+        lastName: this.lastName
+      });
+
+  }
+
+
+  public onLogout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['events'])
     });
   }
 }

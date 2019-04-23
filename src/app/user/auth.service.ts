@@ -12,25 +12,36 @@ export class AuthService {
 
   }
 
-  public loginUser(userName: string, password: string) {
-    let options = {
+  private getApplicationJsonHeader(): any {
+    return {
       headers: new HttpHeaders({
-        'Authorization': 'Basic ' + btoa(userName + ':' + password)
+        'Content-Type':  'application/json'
+      })
+    };
+  }
+
+  private getBasicHeader(userName: string, password: string) {
+    let authorizationData = 'Basic ' + btoa(userName + ':' + password);
+
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': authorizationData
       })
     };
 
-    return this.http.post('/api/login', options).pipe(tap((user: any) => {
+  }
+
+
+  /**
+   * LoginUser: Logs in the user based on the credentials supplied.
+   */
+  public loginUser(userName: string, password: string) {
+    return this.http.post('/api/login', {}, this.getBasicHeader(userName, password)).pipe(tap((user: any) => {
       this.currentUser = <IUser>user;
-      // this.currentUser = {
-      //   id: 1,
-      //   userName: user.userName,
-      //   lastName: user.lastName,
-      //   firstName: user.firstName,
-      // };
     })).pipe(catchError(err => {
       return of(false);
     }));
-
   }
 
   public getStatus() {
@@ -43,8 +54,50 @@ export class AuthService {
     return !!this.currentUser;
   }
 
+  /**
+   * Update: Updates the first or the last name whatever has been changed.
+   */
   public updateProfile(firstName: string, lastName: string) {
-    this.currentUser.firstName = firstName;
-    this.currentUser.lastName = lastName;
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    /** If the first name has been changed. */
+    if(firstName!== this.currentUser.firstName){
+      this.currentUser.firstName = firstName;
+    }
+
+    /**
+     * If the last name has been changed.
+     */
+    if(lastName !== this.currentUser.lastName) {
+      this.currentUser.lastName = lastName;
+    }
+
+    return this.http.post('/api/update', this.currentUser , options).pipe(tap((user: any) => {
+      this.currentUser = <IUser> user;
+    })).pipe(catchError(err => {
+      return of(false);
+    }));
+  }
+
+
+  /**
+   * Logout: Calls the server logout to clear the authentication credentials.
+   */
+  public logout() {
+
+    let options = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.get('/api/clean',options).pipe(tap((info: any) => {
+      console.log(' Logged out. '+  info);
+      this.currentUser = undefined;
+    }));
   }
 }

@@ -15,6 +15,9 @@ export class VoterService {
     return session.voters.some( voter => voter === userName);
   }
 
+  /**
+   * Deletes the voter information from the session.
+   */
   public deleteVoter(eventId: number, session: ISession, userName: string): boolean {
     session.voters = session.voters.filter( voter => voter !== userName );
 

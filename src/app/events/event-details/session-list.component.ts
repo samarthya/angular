@@ -33,7 +33,7 @@ export class SessionListComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(" NgOnChanges called");
+    console.log(" SessionListComponent: NgOnChanges called");
     if (this.sessions) {
       this.filterSessions(this.filterBy);
       this.sortBy === "votes"

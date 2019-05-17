@@ -4,7 +4,7 @@ Tryint to learn Angular while creating a tuotrial application with the help of P
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server, as it uses proxy to fetch the information from a backend. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -40,3 +40,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * Components and Directives have a life cycle.
 * NgOnInit - Angular calls this hook shortly after the component is created.
 * Dependency injection - DI - Where a class asks for its dependency from an external provider.
+* Effects isolate side effects from components, allowing for more pure components that select state and dispatch actions.
+* Effects perform tasks, which are synchronous or asynchronous and return a new action.

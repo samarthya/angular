@@ -1,13 +1,18 @@
 import { NgModule } from "@angular/core";
+import { StoreModule } from "@ngrx/store";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
-import { TOASTR_TOKEN,
+import { EffectsModule } from "@ngrx/effects";
+import { StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {
+  TOASTR_TOKEN,
   JQ_TOKEN,
   DropWellComponent,
   IToastr,
   ModelDialogComponent,
   ModalTriggerDirective,
-  VoterService } from "./common/index";
+  VoterService
+} from "./common/index";
 import { ErrorComponent } from "./errors/error.component";
 
 import {
@@ -32,6 +37,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UpvoteComponent } from './events/event-details/upvote.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { EventsReducer } from './reducers/events.reducer';
+import { EventsEffects } from './effects/event.effects';
 
 
 let toastr: IToastr = window['toastr'];
@@ -66,11 +73,14 @@ let jQuery: Object = window['$'];
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    StoreModule.forRoot({ events: EventsReducer }),
+    EffectsModule.forRoot([EventsEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true })
   ],
   providers: [
     EventsService,
-    {provide: TOASTR_TOKEN, useValue: toastr},
-    {provide: JQ_TOKEN, useValue: jQuery},
+    { provide: TOASTR_TOKEN, useValue: toastr },
+    { provide: JQ_TOKEN, useValue: jQuery },
     EventResolverService,
     EventsResolver,
     AuthService,
@@ -86,7 +96,7 @@ let jQuery: Object = window['$'];
  * application. By convention, it is usually called
  * AppModule.
  */
-export class AppModule {}
+export class AppModule { }
 
 /**
  * Can deactivate checker implemented as a method instead of a class.

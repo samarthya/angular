@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { EventsService } from "./shared/events.service";
-import { toBase64String } from "@angular/compiler/src/output/source_map";
 
 import { ActivatedRoute } from "@angular/router";
 import { IEvent } from "./shared";
-
+import { Store, select } from "@ngrx/store";
+import { IStore } from "../store/myapp.store";
+import * as EventActions from "../actions/events.actions";
+import { Observable } from 'rxjs';
 /**
  * Using global is not recommended and is neither testable.
  */
@@ -38,25 +39,29 @@ import { IEvent } from "./shared";
 
 export class EventsListComponent implements OnInit {
   public events: IEvent[];
-
+  private events$: Observable<IEvent[]>;
     /**
      * Service injectors
      */
-  constructor(private eventService: EventsService,
-    private route: ActivatedRoute) {
-
+  constructor(private route: ActivatedRoute,
+    private store: Store<IStore>) {
+      this.events$ = store.pipe(select(state => state.events ));
+      this.events$.subscribe(events=> {
+        this.events = events;
+      });
   }
 
-  public getEvents() {
-    return this.eventService.getEvents();
-  }
 
   public ngOnInit() {
+
+    this.store.dispatch(new EventActions.LoadEventsAction());
+
     // this.eventService.getEvents().subscribe( events => this.events = events);
     /**
      * Since I have added a resolver fetching the information from the
      * resolved data.
      */
+    // Commented while trying out the state.
     this.events = this.route.snapshot.data.events;
   }
 }
